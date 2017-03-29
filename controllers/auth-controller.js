@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jwt-simple');
-const Bluebird = require('bleubird');
+const Bluebird = require('bluebird');
 const User = require('../models/user');
 const securityConfig = require('../config/security-config');
 

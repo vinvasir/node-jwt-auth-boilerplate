@@ -12,15 +12,15 @@ module.exports = bookshelf.Model.extend({
 	validPassword(password) {
 		return bcrypt.compareAsync(password, this.attributes.password)
 	},
-	initialize() {
-		this.on('saving', model => {
-			if (!model.hasChanged('password')) return;
+	initialize: function() {
+    this.on('saving', model => {
+        if (!model.hasChanged('password')) return;
 
-			return Bluebird.coroutine(function* () {
-				const salt = yield bcrypt.genSaltAsync(securityConfig.saltRounds);
-				const hashedPassword = yield bcrypt.hashAsync(model.attributes.password, salt);
-				model.set('password', hashedPassword);
-			})
-		})();
+        return Bluebird.coroutine(function* () {
+            const salt = yield bcrypt.genSaltAsync(securityConfig.saltRounds);
+            const hashedPassword = yield bcrypt.hashAsync(model.attributes.password, salt);
+            model.set('password', hashedPassword);
+        })();
+    });
 	}
 });

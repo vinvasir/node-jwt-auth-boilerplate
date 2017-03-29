@@ -4,6 +4,7 @@
   "description": "Based on roblouie article about jwt auth with knex and bookshelf db connection. I will use postgres instead of mysql.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
