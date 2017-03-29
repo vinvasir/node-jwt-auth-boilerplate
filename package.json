@@ -1,0 +1,24 @@
+{
+  "name": "node-auth",
+  "version": "1.0.0",
+  "description": "Based on roblouie article about jwt auth with knex and bookshelf db connection. I will use postgres instead of mysql.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "bookshelf": "^0.10.3",
+    "express": "^4.15.2",
+    "jwt-simple": "^0.5.1",
+    "knex": "^0.12.9",
+    "lodash": "^4.17.4",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "pg": "^6.1.5"
+  }
+}
