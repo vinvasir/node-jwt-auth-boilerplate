@@ -17,7 +17,8 @@
 	        <router-link tag="li" to="/help" activeClass="active"><a>Help</a></router-link>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <router-link tag="li" to="/login" activeClass="active"><a>Log In</a></router-link>
+	        <router-link v-if="!isAuthenticated" tag="li" to="/login" activeClass="active"><a>Log In</a></router-link>
+	        <li v-if="isAuthenticated"><button @click.prevent="logout">Log Out</button></li>
 	        <router-link tag="li" to="/register" activeClass="active"><a>Register</a></router-link>	        
 	      </ul>
 	    </div><!--/.nav-collapse -->
@@ -27,6 +28,11 @@
 
 <script type="text/javascript">
 	export default {
-
+		props: ["isAuthenticated"],
+		methods: {
+			logout() {
+				localStorage.removeItem("token");
+			}
+		}
 	}
 </script>

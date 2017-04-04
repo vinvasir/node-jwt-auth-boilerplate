@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<app-navbar></app-navbar>
+		<app-navbar :is-authenticated="isAuthenticated"></app-navbar>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
@@ -33,10 +33,17 @@
 		components: {
 			AppNavbar
 		},
+    created() {
+      const token = localStorage.getItem("token")
+      if(token) {
+				this.$store.dispatch('setToken', token)
+      }
+    },		
 		data() {
 			return {
 				message: 'Hello from Vue!',
-				count: 0
+				count: 0,
+				isAuthenticated: this.$store.getters.isAuthenticated
 			}
 		},
 		methods: {

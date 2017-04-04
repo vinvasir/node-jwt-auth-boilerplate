@@ -13,7 +13,7 @@ router.post('/login', (req, res) => {
 		const isValidPassword = yield user.validPassword(password);
 		if (isValidPassword) {
 			const token = jwt.encode(user.omit('password'), securityConfig.jwtSecret);
-			res.header('Authorization', token).json({success: true, token: `JWT ${token}`});
+			res.header('Authorization', token).json({success: true, token: token});
 		} else {
 			res.json({success: false, msg: 'Authentication failed'});
 		}

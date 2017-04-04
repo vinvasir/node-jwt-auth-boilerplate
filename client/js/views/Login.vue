@@ -32,7 +32,7 @@
 					username: this.username,
 					password: this.password
 				}).then(({data}) => {
-					console.log(data.token);
+					this.$store.dispatch('setToken', data.token);
 					this.username = "";
 					this.password = "";
 				}).catch(err => console.log(err));
