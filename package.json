@@ -5,7 +5,11 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "node node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "node node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +18,7 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "bookshelf": "^0.10.3",
+    "ejs": "^2.5.6",
     "express": "^4.15.2",
     "jwt-simple": "^0.5.1",
     "knex": "^0.12.9",
@@ -21,5 +26,13 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "pg": "^6.1.5"
+  },
+  "devDependencies": {
+    "axios": "^0.16.0",
+    "bootstrap-sass": "^3.3.7",
+    "jquery": "^3.2.1",
+    "laravel-mix": "^0.10.0",
+    "vue": "^2.2.6",
+    "vue-router": "^2.3.1"
   }
 }
