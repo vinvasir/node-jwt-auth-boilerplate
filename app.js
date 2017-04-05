@@ -64,4 +64,8 @@ app.get('/', (req, res) => {
 	res.render('home');
 });
 
+app.get('/current_user', (req, res) => {
+	res.status(200).json({user: res.locals.user.attributes.username});
+});
+
 app.listen(3000);

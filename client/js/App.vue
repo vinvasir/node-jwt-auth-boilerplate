@@ -46,12 +46,20 @@
       if(token) {
 				this.$store.dispatch('setToken', token)
       }
+      this.$store.dispatch('setCurrentUser');
     },		
 		data() {
 			return {
 				message: 'Hello from Vue!',
-				count: 0,
-				isAuthenticated: this.$store.getters.isAuthenticated
+				count: 0
+			}
+		},
+		computed: {
+			isAuthenticated() {
+				return this.$store.getters.isAuthenticated
+			},
+			currentUser(){ 
+				return this.$store.getters.getCurrentUser
 			}
 		},
 		methods: {
