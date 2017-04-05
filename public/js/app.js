@@ -12172,7 +12172,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			message: ""
+		};
+	},
+	created: function created() {
+		var _this = this;
+
+		axios.get('/users/securedArea').then(function (_ref) {
+			var data = _ref.data;
+
+			console.log(data);
+			_this.message = data.msg;
+		}).catch(function (err) {
+			console.log(err);
+			_this.message = "You must be logged in to see this page";
+		});
+	}
+});
 
 /***/ }),
 /* 36 */
@@ -12541,7 +12560,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('h1', [_vm._v("Help!")])
+  return _c('h1', [_vm._v(_vm._s(_vm.message))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -12660,13 +12679,26 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('nav', {
     staticClass: "navbar navbar-default"
   }, [_c('div', {
     staticClass: "container-fluid"
-  }, [_c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "navbar-collapse collapse",
+    attrs: {
+      "id": "navbar"
+    }
+  }, [_c('ul', {
+    staticClass: "nav navbar-nav"
+  }, [_vm._m(1), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "to": "/help",
+      "tag": "li",
+      "activeClass": "active"
+    }
+  }, [_c('a', [_vm._v("Help")])])], 1), _vm._v(" "), _vm._m(2)])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "navbar-header"
   }, [_c('button', {
     staticClass: "navbar-toggle collapsed",
@@ -12690,22 +12722,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "/"
     }
-  }, [_vm._v("Node/Vue Auth")])]), _vm._v(" "), _c('div', {
-    staticClass: "navbar-collapse collapse",
-    attrs: {
-      "id": "navbar"
-    }
-  }, [_c('ul', {
-    staticClass: "nav navbar-nav"
-  }, [_c('li', [_c('a', {
+  }, [_vm._v("Node/Vue Auth")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
     attrs: {
       "href": "/"
     }
-  }, [_vm._v("Home")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "*"
-    }
-  }, [_vm._v("Nothing")])])]), _vm._v(" "), _c('ul', {
+  }, [_vm._v("Home")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
     staticClass: "nav navbar-nav navbar-right"
   }, [_c('li', [_c('a', {
     attrs: {
@@ -12719,7 +12744,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "/auth/register"
     }
-  }, [_vm._v("Register")])])])])])])
+  }, [_vm._v("Register")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

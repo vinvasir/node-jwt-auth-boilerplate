@@ -53,6 +53,7 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
 	console.log(res.locals.user);
 	console.log(res.locals.flashData);
+	console.log(req.flash());
 	next();
 });
 

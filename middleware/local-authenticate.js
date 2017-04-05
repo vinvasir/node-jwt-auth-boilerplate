@@ -3,6 +3,6 @@ module.exports = (req, res, next) => {
 		next();
 	} else {
 		req.flash("info", "You must be logged in to see this page.");
-		res.redirect("/login");
+		res.status(401).json({msg: "You must be logged in to see this page."});
 	}
 }

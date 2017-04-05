@@ -14,7 +14,7 @@
 	    <div id="navbar" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav">
 	       <li><a href="/">Home</a></li>
-	       <li><a href="*">Nothing</a></li>
+	       <router-link to="/help" tag="li" activeClass="active"><a>Help</a></router-link>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="/auth/login">Log In</a></li>
