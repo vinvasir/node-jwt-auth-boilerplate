@@ -37,11 +37,30 @@ configurePassportLocal();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Express messages
+app.use(require('connect-flash')());
+app.use((req, res, next) => {
+	res.locals.messages = require('express-messages')(req, res);
+  res.locals.user = req.user || null;
+  res.locals.flashData = {
+		flashMessages: req.flash('messsage'),
+		flashErrors: req.flash('error')		
+	};
+
+	next();
+});
+
+app.use((req, res, next) => {
+	console.log(res.locals.user);
+	console.log(res.locals.flashData);
+	next();
+});
+
 app.use('/auth', authController);
 app.use('/users', userController);
 
 app.get('/', (req, res) => {
-	res.render('home', {message: 'Hello from express!'});
+	res.render('home');
 });
 
 app.listen(3000);

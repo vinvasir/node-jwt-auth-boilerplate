@@ -1,5 +1,5 @@
 <% include ./partials/header %>
 
-<h1>Welcome to my Application!</h1>
+<h1>Hello, <%= user ? user.attributes.username : 'anonymous' %>, Welcome to my Application!</h1>
 
 <% include ./partials/footer %>

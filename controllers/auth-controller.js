@@ -7,6 +7,7 @@ const securityConfig = require('../config/security-config');
 
 const router = express.Router();
 router.use(express.static('public'));
+router.use(require('connect-flash')());
 
 router.get('/login', (req, res, next) => {
 	res.render('login');
@@ -16,10 +17,16 @@ router.get('/register', (req, res, next) => {
 	res.render('register');
 });
 
+router.get('/logout', (req, res, next) => {
+	req.logout();
+	req.flash('message', 'Succesfully logged out')
+	res.redirect('/');
+})
+
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', {
 		successRedirect: '/',
-		failureRedirect: '/#/login',
+		failureRedirect: '/',
 		failureFlash: true
 	})(req, res, next);
 });

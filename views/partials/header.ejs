@@ -6,5 +6,20 @@
 </head>
 <body>
 	<div id="app">
-
+		
 		<app>
+		
+		<% flashData.flashMessages.forEach(flashMessage => { %>
+			<div class="alert">
+				<p><%= flashMessage %></p>
+			</div>
+		<% }) %>
+
+
+
+		<% flashData.flashErrors.forEach(flashError => { %>
+			<div class="alert alert-danger">
+				<p><%= flashError %></p>
+			</div>
+		<% }) %>
+				
