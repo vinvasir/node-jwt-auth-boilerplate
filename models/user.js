@@ -1,6 +1,6 @@
 const bookshelf = require('../config/bookshelf-instance');
 const Bluebird = require('bluebird');
-const bcrypt = Bluebird.promisifyAll(require('bcrypt'));
+const bcrypt = Bluebird.promisifyAll(require('bcryptjs'));
 const Role = require('./role');
 const securityConfig = require('../config/security-config');
 
