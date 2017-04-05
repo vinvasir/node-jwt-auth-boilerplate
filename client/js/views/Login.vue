@@ -2,15 +2,15 @@
 	<div>
 		<h1>Enter your credentials below:</h1>
 
-		<form @submit.prevent="handleSubmit">
+		<form action="/auth/login" method="post">
 			<div class="form-group">
 				<label for="username">Username:</label>
-				<input type="text" v-model="username" id="username" class="form-control">
+				<input type="text" name="username" id="username" class="form-control">
 			</div>
 
 			<div class="form-group">
 				<label for="password">Password:</label>
-				<input type="password" v-model="password" id="password" class="form-control">
+				<input type="password" name="password" id="password" class="form-control">
 			</div>
 
 			<button type="submit" class="btn btn-default">Log In</button>

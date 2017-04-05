@@ -13,13 +13,13 @@
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav">
-	        <router-link tag="li" to="/" activeClass="active"><a>Home</a></router-link>
-	        <router-link tag="li" to="/help" activeClass="active"><a>Help</a></router-link>
+	       <li><a href="/">Home</a></li>
+	       <li><a href="*">Nothing</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <router-link v-if="!isAuthenticated" tag="li" to="/login" activeClass="active"><a>Log In</a></router-link>
-	        <li v-if="isAuthenticated"><button @click.prevent="logout">Log Out</button></li>
-	        <router-link tag="li" to="/register" activeClass="active"><a>Register</a></router-link>	        
+	        <li><a href="/auth/login">Log In</a></li>
+	        <li><a href="/auth/logout">Log Out</a></li>
+	        <li><a href="/auth/register">Register</a></li>	        
 	      </ul>
 	    </div><!--/.nav-collapse -->
 	  </div><!--/.container-fluid -->

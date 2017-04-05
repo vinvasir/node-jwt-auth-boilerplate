@@ -1,12 +1,30 @@
 const express = require('express');
 const jwt = require('jwt-simple');
+const passport = require('passport');
 const Bluebird = require('bluebird');
 const User = require('../models/user');
 const securityConfig = require('../config/security-config');
 
 const router = express.Router();
+router.use(express.static('public'));
 
-router.post('/login', (req, res) => {
+router.get('/login', (req, res, next) => {
+	res.render('login');
+});
+
+router.get('/register', (req, res, next) => {
+	res.render('register');
+});
+
+router.post('/login', (req, res, next) => {
+	passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/#/login',
+		failureFlash: true
+	})(req, res, next);
+});
+
+router.post('/jwt/login', (req, res) => {
 	const {username, password} = req.body;
 	Bluebird.coroutine(function* () {
 		const user = yield User.forge({username: username}).fetch();
