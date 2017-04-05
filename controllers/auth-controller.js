@@ -48,7 +48,14 @@ router.post('/jwt/login', (req, res) => {
 router.post('/register', (req, res) => {
 	const {username, password} = req.body;
 	User.forge({username, password}).save()
-			.then(user => res.json(user.omit('password')));
-})
+			.then(user => {
+				req.login(user, (err) => {
+					if(err) {
+						return console.log(err);
+					}
+				  res.redirect('/');
+				})
+			});
+});
 
 module.exports = router;
