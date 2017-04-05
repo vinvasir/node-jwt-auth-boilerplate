@@ -68,4 +68,6 @@ app.get('/current_user', (req, res) => {
 	res.status(200).json({user: res.locals.user.attributes.username});
 });
 
-app.listen(3000);
+const port = process.env.PORT || 3000;
+
+app.listen(port);
