@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<app-navbar :is-authenticated="isAuthenticated"></app-navbar>
+		<app-navbar :currentUser="currentUser"></app-navbar>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">

@@ -17,9 +17,9 @@
 	       <router-link to="/help" tag="li" activeClass="active"><a>Help</a></router-link>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/auth/login">Log In</a></li>
-	        <li><a href="/auth/logout">Log Out</a></li>
-	        <li><a href="/auth/register">Register</a></li>	        
+	        <li v-if="!currentUser"><a href="/auth/login">Log In</a></li>
+	        <li v-if="currentUser"><a href="/auth/logout">Log Out</a></li>
+	        <li v-if="!currentUser"><a href="/auth/register">Register</a></li>	        
 	      </ul>
 	    </div><!--/.nav-collapse -->
 	  </div><!--/.container-fluid -->
@@ -28,7 +28,7 @@
 
 <script type="text/javascript">
 	export default {
-		props: ["isAuthenticated"],
+		props: ["currentUser"],
 		methods: {
 			logout() {
 				localStorage.removeItem("token");

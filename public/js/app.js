@@ -12314,7 +12314,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ["isAuthenticated"],
+	props: ["currentUser"],
 	methods: {
 		logout: function logout() {
 			localStorage.removeItem("token");
@@ -12660,7 +12660,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('app-navbar', {
     attrs: {
-      "is-authenticated": _vm.isAuthenticated
+      "currentUser": _vm.currentUser
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "container"
@@ -12726,7 +12726,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "tag": "li",
       "activeClass": "active"
     }
-  }, [_c('a', [_vm._v("Help")])])], 1), _vm._v(" "), _vm._m(2)])])])
+  }, [_c('a', [_vm._v("Help")])])], 1), _vm._v(" "), _c('ul', {
+    staticClass: "nav navbar-nav navbar-right"
+  }, [(!_vm.currentUser) ? _c('li', [_c('a', {
+    attrs: {
+      "href": "/auth/login"
+    }
+  }, [_vm._v("Log In")])]) : _vm._e(), _vm._v(" "), (_vm.currentUser) ? _c('li', [_c('a', {
+    attrs: {
+      "href": "/auth/logout"
+    }
+  }, [_vm._v("Log Out")])]) : _vm._e(), _vm._v(" "), (!_vm.currentUser) ? _c('li', [_c('a', {
+    attrs: {
+      "href": "/auth/register"
+    }
+  }, [_vm._v("Register")])]) : _vm._e()])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "navbar-header"
@@ -12759,22 +12773,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "/"
     }
   }, [_vm._v("Home")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    staticClass: "nav navbar-nav navbar-right"
-  }, [_c('li', [_c('a', {
-    attrs: {
-      "href": "/auth/login"
-    }
-  }, [_vm._v("Log In")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "/auth/logout"
-    }
-  }, [_vm._v("Log Out")])]), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "/auth/register"
-    }
-  }, [_vm._v("Register")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
