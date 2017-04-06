@@ -1,15 +1,19 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const session = require('express-session');
+
 const passport = require('passport');
 const configurePassportJwt = require('./config/passport-jwt-config');
 const configurePassportLocal = require('./config/passport-local-config');
+
 const authController = require('./controllers/auth-controller');
 const userController = require('./controllers/user-controller');
+const postController = require('./controllers/post-controller');
 
 const app = express();
 
@@ -63,6 +67,7 @@ app.use((req, res, next) => {
 
 app.use('/auth', authController);
 app.use('/users', userController);
+app.use('/posts', postController);
 
 app.get('/', (req, res) => {
 	res.render('home');

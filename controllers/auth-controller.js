@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(express.static('public'));
 router.use(require('connect-flash')());
 
-const csrfProtection = csrf({ cookie: true })
+const csrfProtection = csrf({ cookie: true });
 
 router.get('/login', csrfProtection, (req, res, next) => {
 	res.render('login', { csrfToken: req.csrfToken() });
