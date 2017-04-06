@@ -12430,7 +12430,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			newPost: {}
+			newPost: {},
+			error: ""
 		};
 	},
 
@@ -12443,7 +12444,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 				_this.$store.dispatch('addPost', data);
 			}).catch(function (err) {
-				return console.log(err);
+				console.log(err);
 			});
 		}
 	}

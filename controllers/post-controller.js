@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 		}).catch(e => console.error(e));
 });
 
-router.post('/', (req, res) => {
+router.post('/', localAuth, (req, res) => {
 	const {title, body} = req.body;
 
 	let id;

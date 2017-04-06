@@ -18,7 +18,8 @@
 	export default {
 		data() {
 			return {
-				newPost: {}
+				newPost: {},
+				error: ""
 			}
 		},
 		methods: {
@@ -26,7 +27,9 @@
 				axios.post('/posts', this.newPost)
 					.then(({data}) => {
 						this.$store.dispatch('addPost', data)
-					}).catch(err => console.log(err));
+					}).catch(err => {
+						console.log(err);
+					});
 			}
 		}
 	}
