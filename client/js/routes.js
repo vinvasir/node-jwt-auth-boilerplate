@@ -16,6 +16,10 @@ let routes = [
 	{
 		path: '/register',
 		component: require('./views/Register.vue')
+	},
+	{
+		path: '/posts',
+		component: require('./views/posts/PostsList.vue')
 	}
 ];
 

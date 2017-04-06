@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 
 const state = {
 	token: null,
-	currentUser: null
+	currentUser: null,
+	posts: null
 };
 
 const getters = {
@@ -12,6 +13,9 @@ const getters = {
   },
   getCurrentUser: state => {
   	return state.currentUser;
+  },
+  getPosts: state => {
+  	return state.posts;
   }
 };
 
@@ -26,6 +30,9 @@ const mutations = {
   },
   'SET_CURRENT_USER'(state, payload) {
   	state.currentUser = payload;
+  },
+  'SET_POSTS'(state, payload) {
+  	state.posts = payload;
   }
 }
 
@@ -45,6 +52,15 @@ const actions = {
 				user = data.user;
 				commit('SET_CURRENT_USER', user);
 			}).catch(err => user = null);
+	},
+	fetchPosts({commit}) {
+		let posts = null;
+
+		axios.get('/posts')
+			.then(({data}) => {
+				posts = data.posts;
+				commit('SET_POSTS', posts);
+			}).catch(err => posts = null);
 	}
 }
 

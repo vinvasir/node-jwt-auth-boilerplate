@@ -12027,6 +12027,9 @@ var routes = [{
 }, {
 	path: '/register',
 	component: __webpack_require__(47)
+}, {
+	path: '/posts',
+	component: __webpack_require__(62)
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
@@ -12047,7 +12050,8 @@ var routes = [{
 
 var state = {
 	token: null,
-	currentUser: null
+	currentUser: null,
+	posts: null
 };
 
 var getters = {
@@ -12056,6 +12060,9 @@ var getters = {
 	},
 	getCurrentUser: function getCurrentUser(state) {
 		return state.currentUser;
+	},
+	getPosts: function getPosts(state) {
+		return state.posts;
 	}
 };
 
@@ -12070,6 +12077,9 @@ var mutations = {
 	},
 	'SET_CURRENT_USER': function SET_CURRENT_USER(state, payload) {
 		state.currentUser = payload;
+	},
+	'SET_POSTS': function SET_POSTS(state, payload) {
+		state.posts = payload;
 	}
 };
 
@@ -12097,6 +12107,20 @@ var actions = {
 			commit('SET_CURRENT_USER', user);
 		}).catch(function (err) {
 			return user = null;
+		});
+	},
+	fetchPosts: function fetchPosts(_ref5) {
+		var commit = _ref5.commit;
+
+		var posts = null;
+
+		axios.get('/posts').then(function (_ref6) {
+			var data = _ref6.data;
+
+			posts = data.posts;
+			commit('SET_POSTS', posts);
+		}).catch(function (err) {
+			return posts = null;
 		});
 	}
 };
@@ -12284,6 +12308,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -12726,7 +12751,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "tag": "li",
       "activeClass": "active"
     }
-  }, [_c('a', [_vm._v("Help")])])], 1), _vm._v(" "), _c('ul', {
+  }, [_c('a', [_vm._v("Help")])]), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "to": "/posts",
+      "tag": "li",
+      "activeClass": "active"
+    }
+  }, [_c('a', [_vm._v("Posts")])])], 1), _vm._v(" "), _c('ul', {
     staticClass: "nav navbar-nav navbar-right"
   }, [(!_vm.currentUser) ? _c('li', [_c('a', {
     attrs: {
@@ -13604,6 +13635,169 @@ var index_esm = {
 
 module.exports = __webpack_require__(12);
 
+
+/***/ }),
+/* 58 */,
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: {
+		post: {
+			type: Object,
+			required: true
+		}
+	}
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostDetail__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PostDetail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PostDetail__);
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	components: {
+		PostDetail: __WEBPACK_IMPORTED_MODULE_0__PostDetail___default.a
+	},
+	created: function created() {
+		this.$store.dispatch('fetchPosts');
+	},
+
+	computed: {
+		posts: function posts() {
+			return this.$store.getters.getPosts;
+		}
+	}
+});
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(59),
+  /* template */
+  __webpack_require__(64),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/pvasireddy/Desktop/FOSS/node-auth/client/js/views/posts/PostDetail.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] PostDetail.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fcaf1a8c", Component.options)
+  } else {
+    hotAPI.reload("data-v-fcaf1a8c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(60),
+  /* template */
+  __webpack_require__(63),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/pvasireddy/Desktop/FOSS/node-auth/client/js/views/posts/PostsList.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] PostsList.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4beaff78", Component.options)
+  } else {
+    hotAPI.reload("data-v-4beaff78", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', _vm._l((_vm.posts), function(post) {
+    return _c('post-detail', {
+      key: post.id,
+      attrs: {
+        "post": post
+      }
+    })
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4beaff78", module.exports)
+  }
+}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "well"
+  }, [_c('h2', [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.post.body))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-fcaf1a8c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

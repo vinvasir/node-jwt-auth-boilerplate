@@ -16,7 +16,18 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 	const {title, body} = req.body;
-	Post.forge({title, body, user_id: 1}).save()
+
+	let id;
+
+	if(res.locals.user) {
+		id = res.locals.user.attributes.id;
+	} else {
+		id = null;
+	}
+
+	console.log("In the post action, the id is : " + id);
+
+	Post.forge({title, body, user_id: id}).save()
 		.then(post => {
 			res.status(200).json({success: post})
 		}).catch(e => console.error(e));

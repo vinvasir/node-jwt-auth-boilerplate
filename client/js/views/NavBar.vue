@@ -15,6 +15,7 @@
 	      <ul class="nav navbar-nav">
 	       <li><a href="/">Home</a></li>
 	       <router-link to="/help" tag="li" activeClass="active"><a>Help</a></router-link>
+	       <router-link to="/posts" tag="li" activeClass="active"><a>Posts</a></router-link>	       
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li v-if="!currentUser"><a href="/auth/login">Log In</a></li>
