@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jwt-simple');
 const passport = require('passport');
 const Bluebird = require('bluebird');
+const csrf = require('csurf');
 const User = require('../models/user');
 const securityConfig = require('../config/security-config');
 
@@ -9,12 +10,14 @@ const router = express.Router();
 router.use(express.static('public'));
 router.use(require('connect-flash')());
 
-router.get('/login', (req, res, next) => {
-	res.render('login');
+const csrfProtection = csrf({ cookie: true })
+
+router.get('/login', csrfProtection, (req, res, next) => {
+	res.render('login', { csrfToken: req.csrfToken() });
 });
 
-router.get('/register', (req, res, next) => {
-	res.render('register');
+router.get('/register', csrfProtection, (req, res, next) => {
+	res.render('register', { csrfToken: req.csrfToken() });
 });
 
 router.get('/logout', (req, res, next) => {
@@ -23,7 +26,7 @@ router.get('/logout', (req, res, next) => {
 	res.redirect('/');
 })
 
-router.post('/login', (req, res, next) => {
+router.post('/login', csrfProtection, (req, res, next) => {
 	passport.authenticate('local', {
 		successRedirect: '/',
 		failureRedirect: '/',
@@ -45,7 +48,7 @@ router.post('/jwt/login', (req, res) => {
 	})().catch(err => console.log(err));
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', csrfProtection, (req, res) => {
 	const {username, password} = req.body;
 	User.forge({username, password}).save()
 			.then(user => {

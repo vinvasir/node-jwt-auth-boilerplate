@@ -4,6 +4,8 @@
 	<h1>Enter your credentials below:</h1>
 
 	<form action="/auth/login" method="post">
+	<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
 		<div class="form-group">
 			<label for="username">Username:</label>
 			<input type="text" name="username" id="username" class="form-control">

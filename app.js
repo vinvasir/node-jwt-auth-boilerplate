@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const session = require('express-session');
 const passport = require('passport');
 const configurePassportJwt = require('./config/passport-jwt-config');
@@ -29,6 +31,8 @@ app.use(session({
   secret: 'fjei;awhg;hewro',
   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days 
 }));
+
+app.use(cookieParser());
 
 app.use(passport.initialize());
 app.use(passport.session());
