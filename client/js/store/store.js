@@ -33,6 +33,9 @@ const mutations = {
   },
   'SET_POSTS'(state, payload) {
   	state.posts = payload;
+  },
+  'ADD_POST'(state, payload) {
+  	state.posts.push(payload);
   }
 }
 
@@ -61,6 +64,9 @@ const actions = {
 				posts = data.posts;
 				commit('SET_POSTS', posts);
 			}).catch(err => posts = null);
+	},
+	addPost({commit}, payload) {
+		commit('ADD_POST', payload.data);
 	}
 }
 

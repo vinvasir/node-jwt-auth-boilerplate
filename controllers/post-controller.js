@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
 
 	Post.forge({title, body, user_id: id}).save()
 		.then(post => {
-			res.status(200).json({success: post})
+			res.status(200).json({data: post})
 		}).catch(e => console.error(e));
 });
 
