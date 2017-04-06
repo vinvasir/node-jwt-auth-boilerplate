@@ -1,4 +1,5 @@
 const express = require('express');
+const csrf = require('csurf');
 const localAuth = require('../middleware/local-authenticate');
 
 const router = express.Router();
@@ -7,6 +8,8 @@ router.use(require('connect-flash')());
 
 const Post = require('../models/post');
 
+const csrfProtection = csrf({ cookie: true });
+
 router.get('/', (req, res) => {
 	Post.fetchAll({withRelated: ['user']})
 		.then(posts => {
@@ -14,7 +17,11 @@ router.get('/', (req, res) => {
 		}).catch(e => console.error(e));
 });
 
-router.post('/', localAuth, (req, res) => {
+router.get('/new', csrfProtection, (req, res) => {
+	res.json({csrfToken: req.csrfToken()});
+});
+
+router.post('/', localAuth, csrfProtection, (req, res) => {
 	const {title, body} = req.body;
 
 	let id;

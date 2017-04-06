@@ -12431,18 +12431,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	data: function data() {
 		return {
 			newPost: {},
+			csrfToken: "",
 			error: ""
 		};
+	},
+	created: function created() {
+		var _this = this;
+
+		axios.get('/posts/new').then(function (_ref) {
+			var data = _ref.data;
+
+			_this.csrfToken = data.csrfToken;
+		}).catch(function (err) {
+			return console.log(err);
+		});
 	},
 
 	methods: {
 		handleSubmit: function handleSubmit() {
-			var _this = this;
+			var _this2 = this;
 
-			axios.post('/posts', this.newPost).then(function (_ref) {
-				var data = _ref.data;
+			axios.defaults.headers.common['X-CSRF-TOKEN'] = this.csrfToken;
+			axios.post('/posts', this.newPost).then(function (_ref2) {
+				var data = _ref2.data;
 
-				_this.$store.dispatch('addPost', data);
+				_this2.$store.dispatch('addPost', data);
 			}).catch(function (err) {
 				console.log(err);
 			});
