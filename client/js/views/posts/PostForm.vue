@@ -1,5 +1,9 @@
 <template>
 	<form @submit.prevent="handleSubmit">
+		<div class="alert alert-danger" v-if="error" v-for="(value, key) in error">
+			{{ key }} : {{ value }}
+		</div>
+
 		<div class="form-group">
 			<label for="title">Title</label>
 			<input id="title" v-model="newPost.title" type="text" class="form-control">
@@ -19,7 +23,7 @@
 		data() {
 			return {
 				newPost: {},
-				error: ""
+				error: null
 			}
 		},
 		methods: {
@@ -28,7 +32,7 @@
 					.then(({data}) => {
 						this.$store.dispatch('addPost', data)
 					}).catch(err => {
-						console.log(err.code);
+						this.error = err.response.data;
 					});
 			}
 		}

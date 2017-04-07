@@ -30,7 +30,9 @@ router.post('/', localAuth, (req, res) => {
 	Post.forge({title, body, user_id: id}).save()
 		.then(post => {
 			res.status(200).json({data: post})
-		}).catch(e => console.error(e));
+		}).catch(e => {
+			res.json({msg: req.flash('error')})
+		});
 });
 
 router.get('/:id', (req, res) => {

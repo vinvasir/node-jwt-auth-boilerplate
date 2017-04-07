@@ -12428,12 +12428,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
 			newPost: {},
-			error: ""
+			error: null
 		};
 	},
 
@@ -12446,7 +12450,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 				_this.$store.dispatch('addPost', data);
 			}).catch(function (err) {
-				console.log(err.code);
+				_this.error = err.response.data;
 			});
 		}
 	}
@@ -12841,7 +12845,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.handleSubmit($event)
       }
     }
-  }, [_c('div', {
+  }, [_vm._l((_vm.error), function(value, key) {
+    return (_vm.error) ? _c('div', {
+      staticClass: "alert alert-danger"
+    }, [_vm._v("\n\t\t" + _vm._s(key) + " : " + _vm._s(value) + "\n\t")]) : _vm._e()
+  }), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('label', {
     attrs: {
@@ -12899,7 +12907,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Add Post")])])
+  }, [_vm._v("Add Post")])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
