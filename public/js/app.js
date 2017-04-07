@@ -12446,7 +12446,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 				_this.$store.dispatch('addPost', data);
 			}).catch(function (err) {
-				console.log(err);
+				console.log(err.code);
 			});
 		}
 	}

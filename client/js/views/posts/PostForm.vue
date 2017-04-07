@@ -28,7 +28,7 @@
 					.then(({data}) => {
 						this.$store.dispatch('addPost', data)
 					}).catch(err => {
-						console.log(err);
+						console.log(err.code);
 					});
 			}
 		}

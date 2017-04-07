@@ -2,7 +2,6 @@ const express = require('express');
 const jwt = require('jwt-simple');
 const passport = require('passport');
 const Bluebird = require('bluebird');
-const csrf = require('csurf');
 const User = require('../models/user');
 const securityConfig = require('../config/security-config');
 
@@ -10,14 +9,12 @@ const router = express.Router();
 router.use(express.static('public'));
 router.use(require('connect-flash')());
 
-const csrfProtection = csrf({ cookie: true });
-
 router.get('/login', (req, res, next) => {
-	res.render('login', { csrfToken: req.csrfToken() });
+	res.render('login');
 });
 
 router.get('/register', (req, res, next) => {
-	res.render('register', { csrfToken: req.csrfToken() });
+	res.render('register');
 });
 
 router.get('/logout', (req, res, next) => {
