@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
 const session = require('express-session');
+const helmet = require('helmet');
 
 const passport = require('passport');
 const configurePassportJwt = require('./config/passport-jwt-config');
@@ -21,6 +22,8 @@ app.use(logger('dev'));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
+
+app.use(helmet());
 
 // Knex Session Store
 const KnexSessionStore = require('connect-session-knex')(session);

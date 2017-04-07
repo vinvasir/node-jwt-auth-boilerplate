@@ -28,6 +28,7 @@
     "express-ejs-layouts": "^2.3.0",
     "express-messages": "^1.0.1",
     "express-session": "^1.15.2",
+    "helmet": "^3.5.0",
     "jwt-simple": "^0.5.1",
     "knex": "^0.12.9",
     "lodash": "^4.17.4",
