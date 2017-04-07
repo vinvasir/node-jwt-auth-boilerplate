@@ -12,11 +12,11 @@ router.use(require('connect-flash')());
 
 const csrfProtection = csrf({ cookie: true });
 
-router.get('/login', csrfProtection, (req, res, next) => {
+router.get('/login', (req, res, next) => {
 	res.render('login', { csrfToken: req.csrfToken() });
 });
 
-router.get('/register', csrfProtection, (req, res, next) => {
+router.get('/register', (req, res, next) => {
 	res.render('register', { csrfToken: req.csrfToken() });
 });
 
@@ -26,7 +26,7 @@ router.get('/logout', (req, res, next) => {
 	res.redirect('/');
 })
 
-router.post('/login', csrfProtection, (req, res, next) => {
+router.post('/login', (req, res, next) => {
 	passport.authenticate('local', {
 		successRedirect: '/',
 		failureRedirect: '/',
@@ -48,7 +48,7 @@ router.post('/jwt/login', (req, res) => {
 	})().catch(err => console.log(err));
 });
 
-router.post('/register', csrfProtection, (req, res) => {
+router.post('/register', (req, res) => {
 	const {username, password} = req.body;
 	User.forge({username, password}).save()
 			.then(user => {

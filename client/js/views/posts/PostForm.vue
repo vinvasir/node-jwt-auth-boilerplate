@@ -1,5 +1,5 @@
 <template>
-	<form @click.prevent="handleSubmit">
+	<form @submit.prevent="handleSubmit">
 		<div class="form-group">
 			<label for="title">Title</label>
 			<input id="title" v-model="newPost.title" type="text" class="form-control">

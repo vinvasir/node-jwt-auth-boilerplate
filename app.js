@@ -38,6 +38,8 @@ app.use(session({
 
 app.use(cookieParser());
 
+const csrfProtection = csrf({ cookie: true });
+
 app.use(passport.initialize());
 app.use(passport.session());
 configurePassportJwt();
@@ -47,6 +49,9 @@ app.use(bodyParser.json());
 
 // Express messages
 app.use(require('connect-flash')());
+
+app.use(csrfProtection);
+// set up variables for all routes
 app.use((req, res, next) => {
 	res.locals.messages = require('express-messages')(req, res);
   res.locals.user = req.user || null;
@@ -54,6 +59,8 @@ app.use((req, res, next) => {
 		flashMessages: req.flash('messsage'),
 		flashErrors: req.flash('error')		
 	};
+
+	res.locals.csrfToken = req.csrfToken();
 
 	next();
 });
@@ -69,12 +76,9 @@ app.use('/auth', authController);
 app.use('/users', userController);
 app.use('/posts', postController);
 
+
 app.get('/', (req, res) => {
 	res.render('home');
-});
-
-app.get('/current_user', (req, res) => {
-	res.status(200).json({user: res.locals.user.attributes.username});
 });
 
 const port = process.env.PORT || 3000;

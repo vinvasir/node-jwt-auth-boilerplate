@@ -11981,6 +11981,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
 
 
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
 new Vue({
 	el: '#app',
 	components: { App: __WEBPACK_IMPORTED_MODULE_0__App_vue___default.a },
@@ -12834,7 +12836,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('form', {
     on: {
-      "click": function($event) {
+      "submit": function($event) {
         $event.preventDefault();
         _vm.handleSubmit($event)
       }

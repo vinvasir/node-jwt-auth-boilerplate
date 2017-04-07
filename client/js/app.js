@@ -8,6 +8,8 @@ Vue.use(VueRouter);
 
 import router from './routes';
 
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
 new Vue({
 	el: '#app',
 	components: {App},
