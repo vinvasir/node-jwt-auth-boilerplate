@@ -21,9 +21,22 @@ describe('CREATE', () => {
 				expect(user).to.equal(null);
 				done();
 			}).catch(err => {
-				console.log(err);
 				expect(err).to.not.equal(null);
 				done();
 			})
-	})	
+	});
+
+	it('should not allow creation of a user with a blank password', done => {
+		let badUser = {username: faker.internet.userName(), password: ''}
+
+		User.forge(badUser).save()
+			.then(user => {
+				console.log(user);
+				expect(user).to.equal(null);
+				done();
+			}).catch(err => {
+				expect(err).to.not.equal(null);
+				done();
+			})
+	});
 });

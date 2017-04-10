@@ -9,7 +9,8 @@ const Post = require('./post');
 
 const Checkit = require('checkit');
 const checkit = new Checkit({
-	username: 'required'
+	username: 'required',
+	password: 'required'
 })
 
 module.exports = bookshelf.model('User', {
@@ -36,6 +37,7 @@ module.exports = bookshelf.model('User', {
           model.set('password', hashedPassword);
       })();
     });
-    this.on('saving', this.validateAll)
+
+    this.on('saving', this.validateAll);
 	}
 });
