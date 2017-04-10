@@ -37,7 +37,7 @@ describe('CREATE', () => {
 				expect(err).to.not.equal(null);
 				done();
 			})
-	})
+	});
 
 	it('should not allow creation of a user with a blank password', done => {
 		let badUser = {username: faker.internet.userName(), password: ''}
@@ -45,6 +45,19 @@ describe('CREATE', () => {
 		User.forge(badUser).save()
 			.then(user => {
 				console.log(user);
+				expect(user).to.equal(null);
+				done();
+			}).catch(err => {
+				expect(err).to.not.equal(null);
+				done();
+			})
+	});
+
+	it('should require a password at least 6 characters long', done => {
+		let badUser = {username: 'goodname', password: '12345'}
+
+		User.forge(badUser).save()
+			.then(user => {
 				expect(user).to.equal(null);
 				done();
 			}).catch(err => {

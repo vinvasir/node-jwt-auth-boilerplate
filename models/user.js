@@ -10,7 +10,7 @@ const Post = require('./post');
 const Checkit = require('checkit');
 const checkit = new Checkit({
 	username: ['required', 'minLength:6'],
-	password: 'required'
+	password: ['required', 'minLength:6']
 })
 
 module.exports = bookshelf.model('User', {
