@@ -28,18 +28,14 @@ module.exports = bookshelf.model('User', {
 	},
 	initialize: function() {
     this.on('saving', model => {
-    		this.validateAll()
-    			.then(() => {
-		        if (!model.hasChanged('password')) return;
+      if (!model.hasChanged('password')) return;
 
-		        return Bluebird.coroutine(function* () {
-		            const salt = yield bcrypt.genSaltAsync(securityConfig.saltRounds);
-		            const hashedPassword = yield bcrypt.hashAsync(model.attributes.password, salt);
-		            model.set('password', hashedPassword);
-		        })();    				
-    			}).catch(err => {
-    				throw new Error(err);
-    			});
+      return Bluebird.coroutine(function* () {
+          const salt = yield bcrypt.genSaltAsync(securityConfig.saltRounds);
+          const hashedPassword = yield bcrypt.hashAsync(model.attributes.password, salt);
+          model.set('password', hashedPassword);
+      })();
     });
+    this.on('saving', this.validateAll)
 	}
 });
