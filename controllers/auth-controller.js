@@ -56,9 +56,13 @@ router.post('/register', (req, res) => {
 				  res.redirect('/');
 				})
 			}).catch(err => {
-				// res.status(500).json({msg: err})
-				req.flash('error', err.toJSON().username);
-				req.flash('error', err.toJSON().password);
+				if (err.toJSON().username) {
+					req.flash('error', err.toJSON().username);					
+				}
+
+				if (err.toJSON().password) {
+					req.flash('error', err.toJSON().password);
+				}
 
 				res.redirect('/auth/register');
 			});
