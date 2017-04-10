@@ -32,16 +32,32 @@ describe('Post #all', () => {
 				}).save()
 			);
 		}
-		 Promise.all(promises).then(values => {
+
+	  Promise.all(promises).then(values => {
 			 done();
 		}).catch(err => done(err));
-	})
+	});
 
 	it('should return all posts', done => {
 		Post.fetchAll()
 			.then(posts => {
 				expect(posts.length).to.equal(5);
 				done();
-			})
-	})
-})
+			});
+	});
+
+	it('should return the title and body of each post', done => {
+		let postsList = [];
+
+		Post.fetchAll()
+			.then(posts => {
+				postList = posts;
+				done();
+			});
+
+		postsList.forEach(post => {
+			expect(post.attributes.title).to.not.be(null);
+			expect(post.attributes.body).to.not.be(null);
+		});		
+	});
+});
