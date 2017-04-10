@@ -7,6 +7,11 @@ const securityConfig = require('../config/security-config');
 
 const Post = require('./post');
 
+const Checkit = require('checkit');
+const checkit = new Checkit({
+	username: 'required'
+})
+
 module.exports = bookshelf.model('User', {
 	tableName: 'users',
 	roles() {
@@ -18,15 +23,23 @@ module.exports = bookshelf.model('User', {
 	validPassword(password) {
 		return bcrypt.compareAsync(password, this.attributes.password)
 	},
+	validateAll() {
+		return checkit.run(this.attributes);
+	},
 	initialize: function() {
     this.on('saving', model => {
-        if (!model.hasChanged('password')) return;
+    		this.validateAll()
+    			.then(() => {
+		        if (!model.hasChanged('password')) return;
 
-        return Bluebird.coroutine(function* () {
-            const salt = yield bcrypt.genSaltAsync(securityConfig.saltRounds);
-            const hashedPassword = yield bcrypt.hashAsync(model.attributes.password, salt);
-            model.set('password', hashedPassword);
-        })();
+		        return Bluebird.coroutine(function* () {
+		            const salt = yield bcrypt.genSaltAsync(securityConfig.saltRounds);
+		            const hashedPassword = yield bcrypt.hashAsync(model.attributes.password, salt);
+		            model.set('password', hashedPassword);
+		        })();    				
+    			}).catch(err => {
+    				throw new Error(err);
+    			});
     });
 	}
 });
