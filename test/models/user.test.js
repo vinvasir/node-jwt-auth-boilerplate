@@ -26,6 +26,19 @@ describe('CREATE', () => {
 			})
 	});
 
+	it('should require a username at least 6 characters long', done => {
+		let badUser = {username: '1fake', password: faker.internet.password()}
+
+		User.forge(badUser).save()
+			.then(user => {
+				expect(user).to.equal(null);
+				done();
+			}).catch(err => {
+				expect(err).to.not.equal(null);
+				done();
+			})
+	})
+
 	it('should not allow creation of a user with a blank password', done => {
 		let badUser = {username: faker.internet.userName(), password: ''}
 

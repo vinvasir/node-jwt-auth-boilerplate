@@ -9,7 +9,7 @@ const Post = require('./post');
 
 const Checkit = require('checkit');
 const checkit = new Checkit({
-	username: 'required',
+	username: ['required', 'minLength:6'],
 	password: 'required'
 })
 
