@@ -55,6 +55,8 @@ router.post('/register', (req, res) => {
 					}
 				  res.redirect('/');
 				})
+			}).catch(err => {
+				res.status(500).json({msg: err})
 			});
 });
 

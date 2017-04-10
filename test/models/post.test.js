@@ -1,6 +1,3 @@
-// const dbConfig = require('../../knexfile.js');
-// const knex = require('knex')(dbConfig.test);
-
 const Post = require('../../models/post.js');
 
 describe('Post #create', () => {
@@ -18,6 +15,32 @@ describe('Post #create', () => {
 			})
 			.catch(e => done(e));
 	});
+
+	it('should only allow strings as the title', done => {
+		let badPost = {title: 35, body: faker.lorem.paragraph()}
+
+		Post.forge(badPost).save().then(() => {
+			done()
+		}).catch(() => done());
+
+		Post.forge(badPost).fetch()
+			.then(post => {
+				expect(post).to.equal(null);
+			})
+	})
+
+	it('should only allow text as the body', done => {
+		let badPost = {title: 'cool title', body: 463.1}
+
+		Post.forge(badPost).save().then(() => {
+			done()
+		}).catch(() => done());
+
+		Post.forge(badPost).fetch()
+			.then(post => {
+				expect(post).to.equal(null);
+			})
+	})
 });
 
 describe('Post #all', () => {
@@ -44,20 +67,5 @@ describe('Post #all', () => {
 				expect(posts.length).to.equal(5);
 				done();
 			});
-	});
-
-	it('should return the title and body of each post', done => {
-		let postsList = [];
-
-		Post.fetchAll()
-			.then(posts => {
-				postList = posts;
-				done();
-			});
-
-		postsList.forEach(post => {
-			expect(post.attributes.title).to.not.be(null);
-			expect(post.attributes.body).to.not.be(null);
-		});		
 	});
 });
