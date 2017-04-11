@@ -7,4 +7,4 @@ Update the database configuration in './knefile.js' to match your database setti
 
 Install dependencies with ` npm install `
 
-Build the front end code with ` npm run build `. If you want live updates, use ` npm run watch `
+Build the front end code with ` npm run dev `. If you want live updates, use ` npm run watch ` or ` npm run hot `
