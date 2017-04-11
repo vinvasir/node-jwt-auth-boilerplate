@@ -1,2 +1,10 @@
 # node-jwt-auth-boilerplate
-Creating a boilerplate for JWT auth with a Node + Express + Postgres API. 
+Creating a boilerplate for a Node + Express + Postgres API and a VueJS + Vue Router + Vuex front end. The front end is built with Webpack and uses the default configuration and API from Laravel Mix.
+
+To get started, download, clone, or fork the repository.
+
+Update the database configuration in './knefile.js' to match your database settings.
+
+Install dependencies with ` npm install `
+
+Build the front end code with ` npm run build `. If you want live updates, use ` npm run watch `
